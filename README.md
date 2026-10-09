@@ -1,3 +1,3 @@
 # корешки продакшн
 
-Сайт koreshki-production.ru. Одна страница: `index.html`, фото в `img/`.
+Сайт koreshkipro.ru. Одна страница: `index.html`, фото в `img/`.
