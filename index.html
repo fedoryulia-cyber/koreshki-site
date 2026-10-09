@@ -222,6 +222,26 @@ footer .logo{width:70px;height:43px;color:var(--on-dark)}
 
 .team-values{display:grid;gap:14px;margin-top:26px}
 .team-values p{font-size:17px}
+
+/* v3 */
+.hero-photo{position:relative}
+.hero-grid{position:relative}
+.obves-cv{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.obves-cv.live{pointer-events:auto;cursor:grab}
+.obves-cv.drag{cursor:grabbing}
+.obves-hint{position:absolute;left:16px;bottom:16px;font-size:13px;background:rgba(244,243,239,.88);color:var(--ink);padding:6px 12px;border-radius:999px;pointer-events:none}
+.work .pics.four{grid-template-columns:repeat(4,1fr)}
+@media (max-width:480px){.work .pics.four{grid-template-columns:1fr 1fr}.work .pics.four img:last-child{display:block}}
+.factory{padding-top:32px;border-top:1px solid rgba(244,243,239,.16)}
+.factory-cap{font-family:var(--display);font-weight:600;font-size:clamp(22px,2.4vw,30px);margin-bottom:18px}
+.factory-pics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.factory-pics img{border-radius:18px;aspect-ratio:3/4;object-fit:cover;width:100%}
+@media (max-width:760px){.factory-pics{grid-template-columns:1fr 1fr}}
+.cta{background:var(--lime);padding-block:clamp(36px,5vw,56px)}
+.cta-row{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.cta h2{font-size:clamp(30px,3.6vw,48px)}
+.cta-actions{display:flex;gap:10px;flex-wrap:wrap}
+.foot-links a{color:var(--on-dark)}
 </style>
 
 </head>
@@ -243,7 +263,7 @@ footer .logo{width:70px;height:43px;color:var(--on-dark)}
 
 <main id="top">
   <section class="hero">
-    <div class="wrap hero-grid">
+    <div class="wrap hero-grid" id="obvesStage">
       <div class="hero-copy">
         <svg class="logo" role="img" aria-label="корешки"><use href="#logo"/></svg>
         <div>
@@ -252,7 +272,8 @@ footer .logo{width:70px;height:43px;color:var(--on-dark)}
           <p class="desc">Придумываем и производим полезные и креативные вещи для бизнесов, брендов и событий: от идеи и прототипа до партии, упакованной и доставленной.</p>
         </div>
       </div>
-      <div class="hero-photo"><img src="img/team-blue.jpg" alt="Юля и Ника в голубых рубашках"></div>
+      <div class="hero-photo"><img src="img/team-blue.jpg" alt="Юля и Ника в голубых рубашках"><span class="obves-hint">потяните обвес</span></div>
+      <canvas class="obves-cv" aria-label="Обвес из 3D-печатных деталей, его можно потянуть"></canvas>
     </div>
     <div class="wrap"><p class="slogan"><span>расскажем.</span><span>покажем.</span><span>придумаем.</span><span>посчитаем.</span><span>сделаем.</span><span>доставим.</span></p></div>
   </section>
@@ -264,7 +285,7 @@ footer .logo{width:70px;height:43px;color:var(--on-dark)}
         <article class="card"><img src="img/imake-pencil.jpg" alt="Брендированные пеналы"><h3>Мерч для команды</h3><p>Welcome-наборы и вещи, которыми сотрудники пользуются каждый день.</p></article>
         <article class="card"><img src="img/rusal-2.jpg" alt="Панама со значками для фестиваля"><h3>Раздатка на событие</h3><p>Фестивали, конференции, форумы: то, что гости заберут с собой.</p></article>
         <article class="card"><img src="img/imake-hang.jpg" alt="Сакоши из баннеров"><h3>Апсайкл после события</h3><p>Баннеры и текстиль с застройки превращаем в аксессуары.</p></article>
-        <article class="card"><img src="img/tolk-hand.jpg" alt="Термокружка с обвесом"><h3>Подарки партнёрам</h3><p>Вещи с характером бренда, которые не отправятся в ящик стола.</p></article>
+        <article class="card"><img src="img/tolk-new2.jpg" alt="Термокружка с обвесом"><h3>Подарки партнёрам</h3><p>Вещи с характером бренда, которые не отправятся в ящик стола.</p></article>
       </div>
       <div class="chips"><span class="label">Делаем сами:</span><span class="pill">3D-печать</span><span class="pill">пошив</span><span class="pill">апсайкл</span></div>
     </div>
@@ -345,17 +366,28 @@ footer .logo{width:70px;height:43px;color:var(--on-dark)}
         <div class="pics"><img src="img/g-yellow.jpg" alt="Жёлтые подвески на синем"><img src="img/g-bunch.jpg" alt="Связка фиолетовых подвесок"><img src="img/g-close.jpg" alt="Подвеска с капсулой крупно"></div>
       </article>
       <article class="work">
-        <div><span class="pill">ВХК</span><h3>Чехлы для ноутбуков</h3><p>Стёганый рипстоп, объёмные ручки на карабинах, 3D-брелок в цветах бренда.</p><p><b>150 чехлов за 25 дней.</b></p></div>
-        <div class="pics"><img src="img/b-bags.jpg" alt="Салатовая и серая сумки"><img src="img/b-2.jpg" alt="Сумка на столе"><img src="img/b-3.jpg" alt="3D-брелок на чехле"></div>
+        <div><span class="pill">В хорошей компании</span><h3>Чехлы для ноутбуков и обвесы</h3><p>Стёганые чехлы из рипстопа в салатовом и сером, объёмные ручки на карабинах, 3D-брелок в цветах бренда. К ним — обвес с кожаным облаком и биркой.</p><p><b>150 чехлов за 25 дней.</b></p></div>
+        <div class="pics four"><img src="img/b-bags.jpg" alt="Салатовый и серый чехлы"><img src="img/vhk-grey2.jpg" alt="Серый стёганый чехол с ручкой на столе"><img src="img/vhk-grey1.jpg" alt="Кольцо-карабин на ручке чехла"><img src="img/vhk-obves.jpg" alt="Обвес с кожаным облаком и биркой «в хорошей компании»"></div>
       </article>
       <article class="work">
         <div><span class="pill">ТОЛК</span><h3>Термокружки с обвесом</h3><p>Нашли, проверили и привезли качественные термокружки, разработали 3D-брелок и дизайн стикерпака для кружки.</p><p><b>60 комплектов за 29 дней.</b></p></div>
-        <div class="pics"><img src="img/tolk-row.jpg" alt="Ряд кружек ТОЛК"><img src="img/tolk-hand.jpg" alt="Кружка в руке"><img src="img/tolk-row2.jpg" alt="Кружки на полке"></div>
+        <div class="pics"><img src="img/tolk-new1.jpg" alt="Кружки ТОЛК с обвесами на полке"><img src="img/tolk-new2.jpg" alt="Брелок ТОЛК в руке"><img src="img/tolk-hand.jpg" alt="Кружка с иллюстрациями"></div>
       </article>
       <article class="work" id="obves">
         <div><span class="pill">обвесы</span><h3>Собираем как конструктор</h3><p>3D-фигурки, карабины, бусины, кожа, паракорд. Внутрь можно спрятать NFC-метку: поднесли смартфон — открылась ваша ссылка.</p><p>От 450 до 1 000 ₽ за штуку.</p></div>
-        <div class="pics"><img src="img/obves-1.jpg" alt="Обвес с кожаным цветком"><img src="img/obves-2.jpg" alt="Обвес с кожаным облаком"><img src="img/box.jpg" alt="Коробка с 3D-деталями"></div>
+        <div class="pics"><img src="img/obves-lime.jpg" alt="Салатовый обвес: карабин, смайл, цветок, бусины"><img src="img/obves-1.jpg" alt="Обвес с кожаным цветком"><img src="img/obves-2.jpg" alt="Обвес с кожаным облаком"></div>
       </article>
+      <div class="factory">
+        <p class="factory-cap">Своё производство: печатаем детали, шьём и собираем сами</p>
+        <div class="factory-pics"><img src="img/parts-lime.jpg" alt="Коробка салатовых 3D-деталей"><img src="img/parts-mix.jpg" alt="Синие и салатовые детали в ящиках"><img src="img/parts-blue.jpg" alt="Ящик синих смайлов, цветов и карабинов"><img src="img/bashnya-pile.jpg" alt="Готовая партия обвесов в цеху"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="wrap cta-row">
+      <h2>Есть задача? Напишите нам</h2>
+      <div class="cta-actions"><a class="btn" href="https://t.me/YuliaFedorova" target="_blank" rel="noopener">Юля · @YuliaFedorova</a><a class="btn" href="https://t.me/nikacheche" target="_blank" rel="noopener">Ника · @nikacheche</a></div>
     </div>
   </section>
 
@@ -387,8 +419,8 @@ footer .logo{width:70px;height:43px;color:var(--on-dark)}
 
   <section class="clients">
     <div class="wrap">
-      <h2>Нам доверяли</h2>
-      <div class="logos"><div>IMAKE</div><div>РУСАЛ</div><div>БАШНЯ</div><div>Leaf to Go</div><div>ВХК</div><div>ТОЛК</div><div>LEVEL</div></div>
+      <h2>Нам доверяют</h2>
+      <div class="logos"><div>IMAKE</div><div>РУСАЛ</div><div>БАШНЯ</div><div>Leaf to Go</div><div>В хорошей компании</div><div>ТОЛК</div><div>LEVEL</div></div>
     </div>
   </section>
 
@@ -424,6 +456,7 @@ footer .logo{width:70px;height:43px;color:var(--on-dark)}
   <div class="wrap">
     <svg class="logo" role="img" aria-label="корешки"><use href="#logo"/></svg>
     <span>корешки продакшн · 3D-печать, пошив, апсайкл</span>
+    <span class="foot-links">Telegram: <a href="https://t.me/YuliaFedorova" target="_blank" rel="noopener">@YuliaFedorova</a> · <a href="https://t.me/nikacheche" target="_blank" rel="noopener">@nikacheche</a></span>
   </div>
 </footer>
 
@@ -436,6 +469,76 @@ document.querySelectorAll('[data-copy]').forEach(function(b){
     try{navigator.clipboard.writeText(t).then(done,fallback)}catch(e){fallback()}
   });
 });
+</script>
+
+<script>
+(function(){
+const stage=document.getElementById('obvesStage');if(!stage)return;
+const cv=stage.querySelector('canvas'),ctx=cv.getContext('2d');
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const BLUE='#2E66D6',BLUE_D='#1F4CA8',LIME='#C6E84E',LIME_D='#9DBD2A',OLIVE='#7E8A3A';
+let W,H,S,anchor,strands=[];
+function strand(n,len,color,width){const pts=[];for(let i=0;i<=n;i++)pts.push({x:anchor.x,y:anchor.y+i*len,px:anchor.x,py:anchor.y+i*len});return{pts,len,color,width}}
+function build(){const d=Math.min(2,devicePixelRatio||1);W=stage.clientWidth;H=stage.clientHeight;cv.width=W*d;cv.height=H*d;ctx.setTransform(d,0,0,d,0,0);
+  const ph=stage.querySelector('.hero-photo').getBoundingClientRect(),gr=stage.getBoundingClientRect(),stacked=ph.top-gr.top>40;
+  S=Math.max(.6,Math.min(1,(stacked?W:W/2)/560));
+  anchor=stacked?{x:ph.left-gr.left+70*S,y:ph.top-gr.top+60*S}:{x:ph.left-gr.left-(ph.left-gr.left-(stage.querySelector('.hero-copy').getBoundingClientRect().right-gr.left))/2,y:60*S};
+  strands=[strand(9,17*S,OLIVE,6*S),strand(15,17*S,BLUE,6*S)];strands[1].bead=10;
+  strands[0].pts.forEach((p,i)=>p.px-=i*1.4);strands[1].pts.forEach((p,i)=>p.px+=i*1)}
+build();let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(build,150)});
+const m={x:-999,y:-999,grab:null};
+function pos(e){const r=stage.getBoundingClientRect(),t=e.touches?e.touches[0]:e;return{x:t.clientX-r.left,y:t.clientY-r.top}}
+function down(e){const p=pos(e);m.x=p.x;m.y=p.y;let best=null,bd=60*S;
+  strands.forEach(st=>st.pts.forEach((q,i)=>{if(!i)return;const d=Math.hypot(q.x-p.x,q.y-p.y);if(d<bd){bd=d;best=q}}));
+  if(best){m.grab=best;stage.style.cursor='grabbing';if(e.cancelable)e.preventDefault()}}
+function near(p){let n=false;strands.forEach(st=>st.pts.forEach((q,i)=>{if(i&&Math.hypot(q.x-p.x,q.y-p.y)<60*S)n=true}));return n}
+function move(e){const p=pos(e);m.x=p.x;m.y=p.y;if(m.grab){if(e.cancelable)e.preventDefault()}else if(!e.touches)stage.style.cursor=near(p)?'grab':''}
+function up(){if(m.grab)stage.style.cursor='';m.grab=null}
+stage.addEventListener('mousedown',down);addEventListener('mousemove',move);addEventListener('mouseup',up);
+stage.addEventListener('touchstart',down,{passive:false});addEventListener('touchmove',move,{passive:false});addEventListener('touchend',up);
+stage.addEventListener('mouseleave',()=>{if(!m.grab){m.x=-999;m.y=-999}});
+let t=0;
+function step(){t+=1/60;const g=.45*S,damp=.985,wind=reduce?0:Math.sin(t*.9)*.05+Math.sin(t*2.3)*.02;
+  strands.forEach(st=>{st.pts.forEach((p,i)=>{if(!i){p.x=anchor.x;p.y=anchor.y;return}
+      const vx=(p.x-p.px)*damp,vy=(p.y-p.py)*damp;p.px=p.x;p.py=p.y;p.x+=vx+wind;p.y+=vy+g;
+      if(!m.grab){const dx=p.x-m.x,dy=p.y-m.y,d=Math.hypot(dx,dy),R=55*S;if(d<R&&d>0){const f=(R-d)/R*2.2;p.x+=dx/d*f;p.y+=dy/d*f}}});
+    if(m.grab&&st.pts.includes(m.grab)){m.grab.x+=(m.x-m.grab.x)*.5;m.grab.y+=(m.y-m.grab.y)*.5}
+    for(let k=0;k<12;k++){for(let i=0;i<st.pts.length-1;i++){const a=st.pts[i],b=st.pts[i+1],dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy)||1,df=(d-st.len)/d;
+      if(!i){b.x-=dx*df;b.y-=dy*df}else{a.x+=dx*df*.5;a.y+=dy*df*.5;b.x-=dx*df*.5;b.y-=dy*df*.5}}
+      st.pts.forEach(p=>{p.x=Math.max(72*S,Math.min(W-72*S,p.x));p.y=Math.min(H-60*S,p.y)})}});
+  const A=strands[0].pts,B=strands[1].pts,bodies=[[A.at(-1),44*S],[B.at(-1),46*S],[B[strands[1].bead],16*S]];
+  for(let k=0;k<3;k++)for(let i=0;i<3;i++)for(let j=i+1;j<3;j++){const[p,r1]=bodies[i],[q,r2]=bodies[j],dx=q.x-p.x,dy=q.y-p.y,d=Math.hypot(dx,dy)||1,mn=r1+r2;
+    if(d<mn){const f=(mn-d)/d*.5;if(p!==m.grab){p.x-=dx*f;p.y-=dy*f}if(q!==m.grab){q.x+=dx*f;q.y+=dy*f}}}
+  [A.at(-1),B.at(-1)].forEach(p=>{if(p!==m.grab){p.x=Math.max(95*S,Math.min(W-95*S,p.x));p.y=Math.min(H-100*S,p.y)}})}
+function sh(){ctx.shadowColor='rgba(26,26,26,.28)';ctx.shadowBlur=16;ctx.shadowOffsetY=8}
+function ns(){ctx.shadowColor='transparent';ctx.shadowBlur=0;ctx.shadowOffsetY=0}
+function rope(st){const P=st.pts;ctx.lineCap=ctx.lineJoin='round';ctx.beginPath();ctx.moveTo(P[0].x,P[0].y);
+  for(let i=1;i<P.length-1;i++)ctx.quadraticCurveTo(P[i].x,P[i].y,(P[i].x+P[i+1].x)/2,(P[i].y+P[i+1].y)/2);
+  ctx.lineTo(P.at(-1).x,P.at(-1).y);ctx.strokeStyle=st.color;ctx.lineWidth=st.width;ctx.stroke();
+  ctx.setLineDash([2,9*S]);ctx.strokeStyle='rgba(255,255,255,.6)';ctx.lineWidth=st.width*.35;ctx.stroke();ctx.setLineDash([])}
+function ang(st){const P=st.pts,a=P.at(-2),b=P.at(-1);return Math.atan2(b.y-a.y,b.x-a.x)-Math.PI/2}
+function smile(p,a){const r=46*S;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(a);ctx.translate(0,r-6*S);
+  sh();ctx.fillStyle=BLUE;ctx.beginPath();ctx.arc(0,0,r,0,Math.PI*2);ctx.fill();ns();
+  ctx.fillStyle=BLUE_D;ctx.beginPath();ctx.arc(0,-r+11*S,4.5*S,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='rgba(20,40,90,.55)';ctx.beginPath();ctx.roundRect(-14*S,-16*S,5*S,18*S,3*S);ctx.roundRect(9*S,-16*S,5*S,18*S,3*S);ctx.fill();
+  ctx.strokeStyle='rgba(20,40,90,.55)';ctx.lineWidth=4.5*S;ctx.lineCap='round';ctx.beginPath();ctx.arc(0,4*S,23*S,.18*Math.PI,.82*Math.PI);ctx.stroke();ctx.restore()}
+function sun(p,a){const R=48*S,r=26*S,n=10;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(a);ctx.translate(0,R-8*S);
+  sh();ctx.fillStyle=LIME;ctx.beginPath();
+  for(let i=0;i<n;i++){const th=i/n*Math.PI*2-Math.PI/2;ctx.moveTo(0,0);ctx.ellipse(Math.cos(th)*(r+8*S),Math.sin(th)*(r+8*S),13*S,7.5*S,th,0,Math.PI*2)}
+  ctx.arc(0,0,r+2*S,0,Math.PI*2);ctx.fill();ns();
+  ctx.strokeStyle=LIME_D;ctx.lineWidth=2*S;ctx.beginPath();ctx.arc(0,0,r-2*S,0,Math.PI*2);ctx.stroke();
+  ctx.fillStyle=LIME_D;ctx.beginPath();ctx.arc(0,0,5*S,0,Math.PI*2);ctx.fill();ctx.restore()}
+function bead(p){const r=15*S;sh();const g=ctx.createRadialGradient(p.x-r*.35,p.y-r*.35,r*.2,p.x,p.y,r);g.addColorStop(0,'#5B8CF0');g.addColorStop(1,BLUE_D);ctx.fillStyle=g;ctx.beginPath();ctx.arc(p.x,p.y,r,0,Math.PI*2);ctx.fill();ns()}
+function carabiner(){const x=anchor.x,y=anchor.y;ctx.strokeStyle='#1A1A1A';ctx.lineWidth=4*S;ctx.beginPath();ctx.moveTo(x,y-56*S);ctx.lineTo(x,0);ctx.stroke();
+  sh();ctx.strokeStyle=BLUE;ctx.lineWidth=11*S;ctx.beginPath();ctx.roundRect(x-23*S,y-56*S,46*S,66*S,23*S);ctx.stroke();ns();
+  ctx.strokeStyle='rgba(255,255,255,.7)';ctx.lineWidth=3.5*S;ctx.beginPath();ctx.moveTo(x+23*S,y-38*S);ctx.lineTo(x+23*S,y-8*S);ctx.stroke()}
+function draw(){ctx.clearRect(0,0,W,H);carabiner();strands.forEach(rope);bead(strands[1].pts[strands[1].bead]);
+  smile(strands[0].pts.at(-1),ang(strands[0]));sun(strands[1].pts.at(-1),ang(strands[1]));
+  ctx.fillStyle=OLIVE;ctx.beginPath();ctx.arc(anchor.x,anchor.y+4*S,8*S,0,Math.PI*2);ctx.fill()}
+let vis=true;new IntersectionObserver(e=>{vis=e[0].isIntersecting}).observe(stage);
+function loop(){if(vis){step();draw()}requestAnimationFrame(loop)}
+if(reduce){for(let i=0;i<240;i++)step();draw();cv.addEventListener('pointermove',()=>{step();draw()})}else loop();
+})();
 </script>
 
 </body>
