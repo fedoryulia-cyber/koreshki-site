@@ -93,7 +93,7 @@ nav a:hover{text-decoration:underline;text-underline-offset:4px}
 .process{background:linear-gradient(180deg,var(--haze-1),var(--haze-2))}
 .process h2{font-size:clamp(44px,6vw,80px);margin-bottom:44px}
 .steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;counter-reset:s}
-.steps li{background:rgba(244,243,239,.62);border-radius:22px;padding:26px;display:flex;flex-direction:column;gap:14px;counter-increment:s}
+.steps li{background:rgba(234,236,242,.97);border-radius:22px;padding:26px;display:flex;flex-direction:column;gap:14px;counter-increment:s}
 .steps li::before{content:counter(s,decimal-leading-zero);font-size:14px;font-weight:700;color:#3D4460;font-variant-numeric:tabular-nums}
 .steps .pill{align-self:flex-start;font-size:17px}
 .steps p{font-size:17px}
@@ -242,6 +242,15 @@ footer .logo{width:70px;height:43px;color:var(--on-dark)}
 .cta h2{font-size:clamp(30px,3.6vw,48px)}
 .cta-actions{display:flex;gap:10px;flex-wrap:wrap}
 .foot-links a{color:var(--on-dark)}
+
+.steps-wrap{position:relative}
+.route{position:absolute;inset:0;overflow:visible;pointer-events:none;z-index:0}
+.route-line{fill:none;stroke:#F4F3EF;stroke-width:2.5;stroke-dasharray:9 9;stroke-linecap:round}
+.route-reveal{fill:none;stroke:#fff;stroke-width:14}
+.steps{position:relative;z-index:1}
+.steps li{transition:background .4s,transform .4s}
+.steps li.on{background:#F4F3EF;transform:translateY(-2px)}
+@media (prefers-reduced-motion: reduce){.steps li{transition:none}}
 </style>
 
 </head>
@@ -377,10 +386,6 @@ footer .logo{width:70px;height:43px;color:var(--on-dark)}
         <div><span class="pill">обвесы</span><h3>Собираем как конструктор</h3><p>3D-фигурки, карабины, бусины, кожа, паракорд. Внутрь можно спрятать NFC-метку: поднесли смартфон — открылась ваша ссылка.</p><p>От 450 до 1 000 ₽ за штуку.</p></div>
         <div class="pics"><img src="img/obves-lime.jpg" alt="Салатовый обвес: карабин, смайл, цветок, бусины"><img src="img/obves-1.jpg" alt="Обвес с кожаным цветком"><img src="img/obves-2.jpg" alt="Обвес с кожаным облаком"></div>
       </article>
-      <div class="factory">
-        <p class="factory-cap">Своё производство: печатаем детали, шьём и собираем сами</p>
-        <div class="factory-pics"><img src="img/parts-lime.jpg" alt="Коробка салатовых 3D-деталей"><img src="img/parts-mix.jpg" alt="Синие и салатовые детали в ящиках"><img src="img/parts-blue.jpg" alt="Ящик синих смайлов, цветов и карабинов"><img src="img/bashnya-pile.jpg" alt="Готовая партия обвесов в цеху"></div>
-      </div>
     </div>
   </section>
 
@@ -394,6 +399,7 @@ footer .logo{width:70px;height:43px;color:var(--on-dark)}
   <section class="process" id="process">
     <div class="wrap">
       <h2>Как работаем</h2>
+      <div class="steps-wrap"><svg class="route" aria-hidden="true"><defs><mask id="routeMask" maskUnits="userSpaceOnUse"><path class="route-reveal"/></mask></defs><path class="route-line" mask="url(#routeMask)"/></svg>
       <ol class="steps">
         <li><span class="pill">разрабатываем</span><p>дизайн и формы изделий</p></li>
         <li><span class="pill">согласовываем</span><p>прототипы с вами</p></li>
@@ -401,7 +407,7 @@ footer .logo{width:70px;height:43px;color:var(--on-dark)}
         <li><span class="pill">собираем</span><p>наносим логотипы и комплектуем</p></li>
         <li><span class="pill">фотографируем</span><p>результат — для вас и для внутренней отчётности</p></li>
         <li><span class="pill">доставляем</span><p>в ваш город или сразу на событие</p></li>
-      </ol>
+      </ol></div>
     </div>
   </section>
 
@@ -529,7 +535,7 @@ function sun(p,a){const R=48*S,r=26*S,n=10;ctx.save();ctx.translate(p.x,p.y);ctx
   ctx.strokeStyle=LIME_D;ctx.lineWidth=2*S;ctx.beginPath();ctx.arc(0,0,r-2*S,0,Math.PI*2);ctx.stroke();
   ctx.fillStyle=LIME_D;ctx.beginPath();ctx.arc(0,0,5*S,0,Math.PI*2);ctx.fill();ctx.restore()}
 function bead(p){const r=15*S;sh();const g=ctx.createRadialGradient(p.x-r*.35,p.y-r*.35,r*.2,p.x,p.y,r);g.addColorStop(0,'#5B8CF0');g.addColorStop(1,BLUE_D);ctx.fillStyle=g;ctx.beginPath();ctx.arc(p.x,p.y,r,0,Math.PI*2);ctx.fill();ns()}
-function carabiner(){const x=anchor.x,y=anchor.y;ctx.strokeStyle='#1A1A1A';ctx.lineWidth=4*S;ctx.beginPath();ctx.moveTo(x,y-56*S);ctx.lineTo(x,0);ctx.stroke();
+function carabiner(){const x=anchor.x,y=anchor.y;
   sh();ctx.strokeStyle=BLUE;ctx.lineWidth=11*S;ctx.beginPath();ctx.roundRect(x-23*S,y-56*S,46*S,66*S,23*S);ctx.stroke();ns();
   ctx.strokeStyle='rgba(255,255,255,.7)';ctx.lineWidth=3.5*S;ctx.beginPath();ctx.moveTo(x+23*S,y-38*S);ctx.lineTo(x+23*S,y-8*S);ctx.stroke()}
 function draw(){ctx.clearRect(0,0,W,H);carabiner();strands.forEach(rope);bead(strands[1].pts[strands[1].bead]);
@@ -538,6 +544,32 @@ function draw(){ctx.clearRect(0,0,W,H);carabiner();strands.forEach(rope);bead(st
 let vis=true;new IntersectionObserver(e=>{vis=e[0].isIntersecting}).observe(stage);
 function loop(){if(vis){step();draw()}requestAnimationFrame(loop)}
 if(reduce){for(let i=0;i<240;i++)step();draw();cv.addEventListener('pointermove',()=>{step();draw()})}else loop();
+})();
+</script>
+
+<script>
+(function(){
+const wrap=document.querySelector('.steps-wrap');if(!wrap)return;
+const svg=wrap.querySelector('svg'),line=wrap.querySelector('.route-line'),rev=wrap.querySelector('.route-reveal'),items=[...wrap.querySelectorAll('.steps li')];
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;let len=0,marks=[];
+function cr(P){let d='M'+P[0].x+','+P[0].y;for(let i=0;i<P.length-1;i++){const p0=P[i-1]||P[i],p1=P[i],p2=P[i+1],p3=P[i+2]||p2;
+  d+=' C'+(p1.x+(p2.x-p0.x)/6)+','+(p1.y+(p2.y-p0.y)/6)+' '+(p2.x-(p3.x-p1.x)/6)+','+(p2.y-(p3.y-p1.y)/6)+' '+p2.x+','+p2.y}return d}
+function build(){const r=wrap.getBoundingClientRect();svg.setAttribute('width',r.width);svg.setAttribute('height',r.height);svg.setAttribute('viewBox','0 0 '+r.width+' '+r.height);
+  const C=items.map(li=>{const b=li.getBoundingClientRect();return{x:b.left-r.left+b.width/2,y:b.top-r.top+b.height/2,w:b.width,h:b.height,top:b.top-r.top,bottom:b.bottom-r.top}});
+  const P=[{x:C[0].x-C[0].w*.55,y:C[0].y}];marks=[];
+  C.forEach((c,i)=>{if(i&&Math.abs(c.y-C[i-1].y)>10){const p=C[i-1],gy=(p.bottom+c.top)/2;
+      if(c.x<p.x-10){P.push({x:p.x+p.w*.58,y:gy-4},{x:c.x-c.w*.58,y:gy+4})}else{P.push({x:p.x+p.w*.58,y:p.y+p.h*.35},{x:c.x+c.w*.58,y:c.y-c.h*.35})}}
+    P.push({x:c.x,y:c.y});marks.push(P.length-1)});
+  P.push({x:C.at(-1).x+C.at(-1).w*.55,y:C.at(-1).y});
+  const d=cr(P);line.setAttribute('d',d);rev.setAttribute('d',d);len=line.getTotalLength();
+  rev.style.strokeDasharray=len;
+  // доля пути до каждой карточки
+  const tmp=document.createElementNS('http://www.w3.org/2000/svg','path');marks=marks.map(k=>{tmp.setAttribute('d',cr(P.slice(0,k+1)));return tmp.getTotalLength()/len});
+  update()}
+function update(){let t=1;if(!reduce){const r=wrap.getBoundingClientRect(),vh=innerHeight;t=Math.min(1,Math.max(0,(vh*.85-r.top)/(r.height*.9)))}
+  rev.style.strokeDashoffset=len*(1-t);items.forEach((li,i)=>li.classList.toggle('on',t>=marks[i]-.02))}
+build();addEventListener('resize',build);addEventListener('scroll',update,{passive:true});
+if(document.fonts)document.fonts.ready.then(build);
 })();
 </script>
 
