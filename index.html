@@ -251,6 +251,10 @@ footer .logo{width:70px;height:43px;color:var(--on-dark)}
 .steps li{transition:background .4s,transform .4s}
 .steps li.on{background:#F4F3EF;transform:translateY(-2px)}
 @media (prefers-reduced-motion: reduce){.steps li{transition:none}}
+.steps-wrap.col .steps{padding-left:28px}
+.steps-wrap.col .steps li{position:relative}
+.steps-wrap.col .steps li::after{content:"";position:absolute;left:-23px;top:50%;width:10px;height:10px;margin-top:-5px;border-radius:50%;background:#F4F3EF;opacity:.4;transition:opacity .3s}
+.steps-wrap.col .steps li.on::after{opacity:1;background:var(--lime)}
 </style>
 
 </head>
@@ -363,6 +367,13 @@ footer .logo{width:70px;height:43px;color:var(--on-dark)}
     </div>
   </section>
 
+  <section class="cta">
+    <div class="wrap cta-row">
+      <h2>Есть задача? Напишите нам</h2>
+      <div class="cta-actions"><a class="btn" href="https://t.me/YuliaFedorova" target="_blank" rel="noopener">Юля · @YuliaFedorova</a><a class="btn" href="https://t.me/nikacheche" target="_blank" rel="noopener">Ника · @nikacheche</a></div>
+    </div>
+  </section>
+
   <section class="works" id="works">
     <div class="wrap">
       <div class="head"><h2>Ещё работы</h2><p class="lead" style="max-width:36ch">Панамы, обвесы, чехлы и кружки.</p></div>
@@ -386,13 +397,6 @@ footer .logo{width:70px;height:43px;color:var(--on-dark)}
         <div><span class="pill">обвесы</span><h3>Собираем как конструктор</h3><p>3D-фигурки, карабины, бусины, кожа, паракорд. Внутрь можно спрятать NFC-метку: поднесли смартфон — открылась ваша ссылка.</p><p>От 450 до 1 000 ₽ за штуку.</p></div>
         <div class="pics"><img src="img/obves-lime.jpg" alt="Салатовый обвес: карабин, смайл, цветок, бусины"><img src="img/obves-1.jpg" alt="Обвес с кожаным цветком"><img src="img/obves-2.jpg" alt="Обвес с кожаным облаком"></div>
       </article>
-    </div>
-  </section>
-
-  <section class="cta">
-    <div class="wrap cta-row">
-      <h2>Есть задача? Напишите нам</h2>
-      <div class="cta-actions"><a class="btn" href="https://t.me/YuliaFedorova" target="_blank" rel="noopener">Юля · @YuliaFedorova</a><a class="btn" href="https://t.me/nikacheche" target="_blank" rel="noopener">Ника · @nikacheche</a></div>
     </div>
   </section>
 
@@ -489,7 +493,7 @@ function build(){const d=Math.min(2,devicePixelRatio||1);W=stage.clientWidth;H=s
   const ph=stage.querySelector('.hero-photo').getBoundingClientRect(),gr=stage.getBoundingClientRect(),stacked=ph.top-gr.top>40;
   S=Math.max(.6,Math.min(1,(stacked?W:W/2)/560));
   anchor=stacked?{x:ph.left-gr.left+70*S,y:ph.top-gr.top+60*S}:{x:ph.left-gr.left-(ph.left-gr.left-(stage.querySelector('.hero-copy').getBoundingClientRect().right-gr.left))/2,y:60*S};
-  strands=[strand(9,17*S,OLIVE,6*S),strand(15,17*S,BLUE,6*S)];strands[1].bead=10;
+  strands=[strand(stacked?17:13,17*S,OLIVE,6*S),strand(15,17*S,BLUE,6*S)];strands[1].bead=10;
   strands[0].pts.forEach((p,i)=>p.px-=i*1.4);strands[1].pts.forEach((p,i)=>p.px+=i*1)}
 build();let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(build,150)});
 const m={x:-999,y:-999,grab:null};
@@ -556,6 +560,10 @@ function cr(P){let d='M'+P[0].x+','+P[0].y;for(let i=0;i<P.length-1;i++){const p
   d+=' C'+(p1.x+(p2.x-p0.x)/6)+','+(p1.y+(p2.y-p0.y)/6)+' '+(p2.x-(p3.x-p1.x)/6)+','+(p2.y-(p3.y-p1.y)/6)+' '+p2.x+','+p2.y}return d}
 function build(){const r=wrap.getBoundingClientRect();svg.setAttribute('width',r.width);svg.setAttribute('height',r.height);svg.setAttribute('viewBox','0 0 '+r.width+' '+r.height);
   const C=items.map(li=>{const b=li.getBoundingClientRect();return{x:b.left-r.left+b.width/2,y:b.top-r.top+b.height/2,w:b.width,h:b.height,top:b.top-r.top,bottom:b.bottom-r.top}});
+  const col=C.every(c=>Math.abs(c.x-C[0].x)<5);wrap.classList.toggle('col',col);
+  if(col){const C2=items.map(li=>{const b=li.getBoundingClientRect();return{y:b.top-r.top+b.height/2,top:b.top-r.top}});const X=10;
+    const d='M'+X+','+(C2[0].top-10)+' L'+X+','+C2.at(-1).y;line.setAttribute('d',d);rev.setAttribute('d',d);len=line.getTotalLength();rev.style.strokeDasharray=len;
+    const tot=C2.at(-1).y-(C2[0].top-10);marks=C2.map(c=>(c.y-(C2[0].top-10))/tot);update();return}
   const P=[{x:C[0].x-C[0].w*.55,y:C[0].y}];marks=[];
   C.forEach((c,i)=>{if(i&&Math.abs(c.y-C[i-1].y)>10){const p=C[i-1],gy=(p.bottom+c.top)/2;
       if(c.x<p.x-10){P.push({x:p.x+p.w*.58,y:gy-4},{x:c.x-c.w*.58,y:gy+4})}else{P.push({x:p.x+p.w*.58,y:p.y+p.h*.35},{x:c.x+c.w*.58,y:c.y-c.h*.35})}}
